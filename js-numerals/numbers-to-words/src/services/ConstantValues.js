@@ -1,5 +1,5 @@
 export const ONES_TO_TWENTY = [
-  "zero",
+  "",
   "one",
   "two",
   "three",
@@ -22,8 +22,8 @@ export const ONES_TO_TWENTY = [
 ];
 
 export const TENS_TO_HUNDRED = [
-  "zero",
-  "ten",
+  "",
+  "",
   "twenty",
   "thirty",
   "forty",
