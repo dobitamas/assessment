@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import convertToWords from "../services/Converter.js";
 
 export default function NumbersToWordsForm() {
-  const [numberToConvert, setNumberToConvert] = useState(0);
+  const [numberToConvert, setNumberToConvert] = useState();
+  const [numberAsWord, setNumberAsWord] = useState("");
 
   const handleChange = (event) => {
     setNumberToConvert(event.target.value);
@@ -10,7 +11,7 @@ export default function NumbersToWordsForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    convertToWords(numberToConvert);
+    setNumberAsWord(convertToWords(numberToConvert));
   };
 
   return (
@@ -26,6 +27,7 @@ export default function NumbersToWordsForm() {
         </label>
         <input type="submit" value="Submit" />
       </form>
+      <h1>{numberAsWord}</h1>
     </div>
   );
 }

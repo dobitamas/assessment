@@ -1,6 +1,6 @@
 const convertToWords = (number) => {
   //TODO
-  console.log(number);
+  return number;
 };
 
 export default convertToWords;
