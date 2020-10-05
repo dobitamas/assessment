@@ -22,8 +22,12 @@ const createWordFromNumber = (number, words = []) => {
   let wordToAdd = "";
 
   if (number === 0) {
-    const wordsAsPhrase = words ? words.join(" ") : "zero";
-    return wordsAsPhrase;
+    //Decides whether the input or the last digit of the input was zero
+    if (words.length === 0) {
+      return "zero";
+    } else {
+      return words.join(" ");
+    }
   }
 
   //Adds minus prefix if necessary
@@ -32,12 +36,12 @@ const createWordFromNumber = (number, words = []) => {
     number = Math.abs(number);
   }
 
-  //
   if (number < 20) {
     wordToAdd = ONES_TO_TWENTY[number];
   } else if (number < ONE_HUNDRED) {
     remainingDigits = number % TEN;
     wordToAdd = TENS_TO_HUNDRED[Math.floor(number / TEN)];
+    //Adds '-' between tens and ones
     if (remainingDigits) {
       wordToAdd += "-" + ONES_TO_TWENTY[remainingDigits];
       remainingDigits = 0;

@@ -11,8 +11,9 @@ export default function NumbersToWordsForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(convertToWords(numberToConvert));
     setNumberAsWord(convertToWords(numberToConvert));
+    console.log(numberAsWord);
+    console.log(numberToConvert);
   };
 
   return (
