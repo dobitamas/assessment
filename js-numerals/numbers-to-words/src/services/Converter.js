@@ -13,7 +13,7 @@ import {
 
 const convertToWords = (number) => {
   //handle input validity and edge cases
-  return createWordFromNumber(number);
+  return addAndToPhrase(createWordFromNumber(number));
 };
 
 //Recursive function to convert digits to words
@@ -23,10 +23,11 @@ const createWordFromNumber = (number, words = []) => {
 
   if (number === 0) {
     //Decides whether the input or the last digit of the input was zero
+
     if (words.length === 0) {
       return "zero";
     } else {
-      return words.join(" ");
+      return words;
     }
   }
 
@@ -51,38 +52,55 @@ const createWordFromNumber = (number, words = []) => {
     wordToAdd =
       createWordFromNumber(Math.floor(number / ONE_HUNDRED)) + " hundred";
   } else if (number < ONE_MILLION) {
-    remainingDigits = number % ONE_THOUSAND;
     //Decides if hundred or thousand phrase is simpler according to the value
-    if (ONE_HUNDRED < remainingDigits && number < 10000) {
+    if (isShorterAsHundred(number)) {
       remainingDigits = number % ONE_HUNDRED;
       wordToAdd =
-        createWordFromNumber(Math.floor(number / ONE_HUNDRED)) + " hundred";
+        createWordFromNumber(Math.floor(number / ONE_HUNDRED)).join(" ") +
+        " hundred";
     } else {
+      remainingDigits = number % ONE_THOUSAND;
       wordToAdd =
-        createWordFromNumber(Math.floor(number / ONE_THOUSAND)) + " thousand";
+        createWordFromNumber(Math.floor(number / ONE_THOUSAND)).join(" ") +
+        " thousand";
     }
   } else if (number < ONE_BILLION) {
     remainingDigits = number % ONE_MILLION;
     wordToAdd =
-      createWordFromNumber(Math.floor(number / ONE_MILLION)) + " million";
+      createWordFromNumber(Math.floor(number / ONE_MILLION)).join(" ") +
+      " million";
   } else if (number < ONE_TRILLION) {
     remainingDigits = number % ONE_BILLION;
     wordToAdd =
-      createWordFromNumber(Math.floor(number / ONE_BILLION)) + " billion";
+      createWordFromNumber(Math.floor(number / ONE_BILLION)).join(" ") +
+      " billion";
   } else if (number < ONE_QUADRILLION) {
     remainingDigits = number % ONE_TRILLION;
     wordToAdd =
-      createWordFromNumber(Math.floor(number / ONE_TRILLION)) + " trillion";
+      createWordFromNumber(Math.floor(number / ONE_TRILLION)).join(" ") +
+      " trillion";
   } else if (number < MAX_SAFE_NUMBER) {
     remainingDigits = number % ONE_QUADRILLION;
     wordToAdd =
-      createWordFromNumber(Math.floor(number / ONE_QUADRILLION)) +
+      createWordFromNumber(Math.floor(number / ONE_QUADRILLION)).join(" ") +
       " quadrillion";
   }
 
   words.push(wordToAdd);
 
   return createWordFromNumber(remainingDigits, words);
+};
+
+const addAndToPhrase = (convertedWords) => {
+  if (2 <= convertedWords.length) {
+    convertedWords.splice(-1, 0, "and");
+  }
+  return convertedWords.join(" ");
+};
+
+const isShorterAsHundred = (number) => {
+  const remainingDigits = number % ONE_THOUSAND;
+  return ONE_HUNDRED < remainingDigits && number < 10000;
 };
 
 export default convertToWords;
