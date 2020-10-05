@@ -11,24 +11,25 @@ import {
   MAX_SAFE_NUMBER,
 } from "./ConstantValues.js";
 
-const convertToWords = (number) => {
-  //handle input validity and edge cases
-  return addAndToPhrase(createWordFromNumber(number));
+const convertToWords = (input) => {
+  const numberToConvert = parseInt(input);
+
+  //Handle inputs that are out of the safe integer range
+  if (isUnsafeValue(numberToConvert)) {
+    return "The input is either too high or too low.";
+  }
+
+  return addAndToPhrase(createWordFromNumber(numberToConvert));
 };
 
 //Recursive function to convert digits to words
 const createWordFromNumber = (number, words = []) => {
-  let remainingDigits = 0;
-  let wordToAdd = "";
-
+  //Decides if the input should return "zero" or tge generated phrase
   if (number === 0) {
-    //Decides whether the input or the last digit of the input was zero
-
     if (words.length === 0) {
-      return "zero";
-    } else {
-      return words;
+      words.push("zero");
     }
+    return words;
   }
 
   //Adds minus prefix if necessary
@@ -36,6 +37,9 @@ const createWordFromNumber = (number, words = []) => {
     words.push("minus");
     number = Math.abs(number);
   }
+
+  let remainingDigits = 0;
+  let wordToAdd = "";
 
   if (number < 20) {
     wordToAdd = ONES_TO_TWENTY[number];
@@ -50,9 +54,9 @@ const createWordFromNumber = (number, words = []) => {
   } else if (number < ONE_THOUSAND) {
     remainingDigits = number % ONE_HUNDRED;
     wordToAdd =
-      createWordFromNumber(Math.floor(number / ONE_HUNDRED)) + " hundred";
+      createWordFromNumber(Math.floor(number / ONE_HUNDRED)).join(" ") +
+      " hundred";
   } else if (number < ONE_MILLION) {
-    //Decides if hundred or thousand phrase is simpler according to the value
     if (isShorterAsHundred(number)) {
       remainingDigits = number % ONE_HUNDRED;
       wordToAdd =
@@ -91,6 +95,12 @@ const createWordFromNumber = (number, words = []) => {
   return createWordFromNumber(remainingDigits, words);
 };
 
+//Decides if input is in the safe range
+const isUnsafeValue = (numberToValidate) => {
+  return MAX_SAFE_NUMBER < Math.abs(numberToValidate);
+};
+
+//Adds "and" before the last part of the phrase
 const addAndToPhrase = (convertedWords) => {
   if (2 <= convertedWords.length) {
     convertedWords.splice(-1, 0, "and");
@@ -98,6 +108,7 @@ const addAndToPhrase = (convertedWords) => {
   return convertedWords.join(" ");
 };
 
+//Decides if thousand could be expressed with hundreds
 const isShorterAsHundred = (number) => {
   const remainingDigits = number % ONE_THOUSAND;
   return ONE_HUNDRED < remainingDigits && number < 10000;
