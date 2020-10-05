@@ -16,81 +16,69 @@ const convertToWords = (number) => {
   return createWordFromNumber(number);
 };
 
-//refactor
-const createWordFromNumber = (number) => {
-  let createdWord = "";
+//Recursive function to convert digits to words
+const createWordFromNumber = (number, words = []) => {
   let remainingDigits = 0;
+  let wordToAdd = "";
+
   if (number === 0) {
-    return "";
+    const wordsAsPhrase = words ? words.join(" ") : "zero";
+    return wordsAsPhrase;
   }
 
+  //Adds minus prefix if necessary
   if (number < 0) {
-    createdWord += "minus ";
+    words.push("minus");
     number = Math.abs(number);
   }
 
+  //
   if (number < 20) {
-    createdWord += ONES_TO_TWENTY[number];
+    wordToAdd = ONES_TO_TWENTY[number];
   } else if (number < ONE_HUNDRED) {
     remainingDigits = number % TEN;
-    createdWord += TENS_TO_HUNDRED[Math.floor(number / TEN)];
+    wordToAdd = TENS_TO_HUNDRED[Math.floor(number / TEN)];
     if (remainingDigits) {
-      createdWord += "-" + ONES_TO_TWENTY[remainingDigits];
+      wordToAdd += "-" + ONES_TO_TWENTY[remainingDigits];
+      remainingDigits = 0;
     }
   } else if (number < ONE_THOUSAND) {
     remainingDigits = number % ONE_HUNDRED;
-    createdWord +=
-      createWordFromNumber(Math.floor(number / ONE_HUNDRED)) + " hundred ";
-    if (remainingDigits) {
-      createdWord += " and " + createWordFromNumber(remainingDigits);
-    }
+    wordToAdd =
+      createWordFromNumber(Math.floor(number / ONE_HUNDRED)) + " hundred";
   } else if (number < ONE_MILLION) {
     remainingDigits = number % ONE_THOUSAND;
+    //Decides if hundred or thousand phrase is simpler according to the value
     if (ONE_HUNDRED < remainingDigits && number < 10000) {
       remainingDigits = number % ONE_HUNDRED;
-      createdWord +=
-        createWordFromNumber(Math.floor(number / ONE_HUNDRED)) + " hundred ";
-      if (remainingDigits) {
-        createdWord += " and " + createWordFromNumber(remainingDigits);
-      }
+      wordToAdd =
+        createWordFromNumber(Math.floor(number / ONE_HUNDRED)) + " hundred";
     } else {
-      createdWord +=
-        createWordFromNumber(Math.floor(number / ONE_THOUSAND)) + " thousand ";
-      if (
-        remainingDigits < ONE_HUNDRED ||
-        remainingDigits % ONE_HUNDRED === 0
-      ) {
-        createdWord += " and ";
-      }
-      createdWord += createWordFromNumber(remainingDigits);
+      wordToAdd =
+        createWordFromNumber(Math.floor(number / ONE_THOUSAND)) + " thousand";
     }
   } else if (number < ONE_BILLION) {
     remainingDigits = number % ONE_MILLION;
-    createdWord +=
-      createWordFromNumber(Math.floor(number / ONE_MILLION)) +
-      " million " +
-      createWordFromNumber(remainingDigits);
+    wordToAdd =
+      createWordFromNumber(Math.floor(number / ONE_MILLION)) + " million";
   } else if (number < ONE_TRILLION) {
     remainingDigits = number % ONE_BILLION;
-    createdWord +=
-      createWordFromNumber(Math.floor(number / ONE_BILLION)) +
-      " billion " +
-      createWordFromNumber(remainingDigits);
+    wordToAdd =
+      createWordFromNumber(Math.floor(number / ONE_BILLION)) + " billion";
   } else if (number < ONE_QUADRILLION) {
     remainingDigits = number % ONE_TRILLION;
-    createdWord +=
-      createWordFromNumber(Math.floor(number / ONE_TRILLION)) +
-      " trillion " +
-      createWordFromNumber(remainingDigits);
+    wordToAdd =
+      createWordFromNumber(Math.floor(number / ONE_TRILLION)) + " trillion";
   } else if (number < MAX_SAFE_NUMBER) {
     remainingDigits = number % ONE_QUADRILLION;
-    createdWord +=
+    wordToAdd =
       createWordFromNumber(Math.floor(number / ONE_QUADRILLION)) +
-      " quadrillion " +
-      createWordFromNumber(remainingDigits);
+      " quadrillion";
   }
 
-  return createdWord;
+  words.push(wordToAdd);
+
+  return createWordFromNumber(remainingDigits, words);
 };
 
 export default convertToWords;
