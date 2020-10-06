@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { convertToWords } from "../services/Converter.js";
+import "../style/app.css";
 
 export default function NumbersToWordsForm() {
   const [numberToConvert, setNumberToConvert] = useState();
@@ -18,7 +19,7 @@ export default function NumbersToWordsForm() {
     <div>
       <form onSubmit={handleSubmit}>
         <label>
-          Number to convert:
+          <h1> Number to convert:</h1>
           <input
             type="number"
             value={numberToConvert}
