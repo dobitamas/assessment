@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import convertToWords from "../services/Converter.js";
+import { convertToWords } from "../services/Converter.js";
 
 export default function NumbersToWordsForm() {
   const [numberToConvert, setNumberToConvert] = useState();

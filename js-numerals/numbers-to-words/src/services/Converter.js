@@ -1,4 +1,4 @@
-import {
+const {
   ONES_TO_TWENTY,
   TENS_TO_HUNDRED,
   TEN,
@@ -9,33 +9,35 @@ import {
   ONE_TRILLION,
   ONE_QUADRILLION,
   MAX_SAFE_NUMBER,
-} from "./ConstantValues.js";
+} = require("./ConstantValues.js");
 
 const convertToWords = (input) => {
   const numberToConvert = parseInt(input);
 
   //Handle inputs that are out of the safe integer range
   if (isUnsafeValue(numberToConvert)) {
-    throw new RangeError("The value is either too high or too low. Please");
+    return "The input value is either too high or too low.";
   }
 
-  return addAndToPhrase(createWordFromNumber(numberToConvert));
+  let createdWord = createWordFromNumber(numberToConvert);
+
+  //Adds minus prefix
+  if (numberToConvert < 0) {
+    createdWord.unshift("minus");
+  }
+  return createdWord.join(" ");
 };
 
 //Recursive function to convert digits to words
 const createWordFromNumber = (number, words = []) => {
+  number = Math.abs(number);
+
   //Decides if the input should return "zero" or the generated phrase
   if (number === 0) {
     if (words.length === 0) {
       words.push("zero");
     }
-    return words;
-  }
-
-  //Adds minus prefix if necessary
-  if (number < 0) {
-    words.push("minus");
-    number = Math.abs(number);
+    return addAndToPhrase(words);
   }
 
   let remainingDigits = 0;
@@ -83,7 +85,7 @@ const createWordFromNumber = (number, words = []) => {
     wordToAdd =
       createWordFromNumber(Math.floor(number / ONE_TRILLION)).join(" ") +
       " trillion";
-  } else if (number < MAX_SAFE_NUMBER) {
+  } else if (number <= MAX_SAFE_NUMBER) {
     remainingDigits = number % ONE_QUADRILLION;
     wordToAdd =
       createWordFromNumber(Math.floor(number / ONE_QUADRILLION)).join(" ") +
@@ -105,7 +107,7 @@ const addAndToPhrase = (convertedWords) => {
   if (2 <= convertedWords.length) {
     convertedWords.splice(-1, 0, "and");
   }
-  return convertedWords.join(" ");
+  return convertedWords;
 };
 
 //Decides if thousand could be expressed with hundreds
@@ -114,4 +116,8 @@ const isShorterAsHundred = (number) => {
   return ONE_HUNDRED < remainingDigits && number < 10000;
 };
 
-export default convertToWords;
+exports.convertToWords = convertToWords;
+exports.createWordFromNumber = createWordFromNumber;
+exports.isUnsafeValue = isUnsafeValue;
+exports.addAndToPhrase = addAndToPhrase;
+exports.isShorterAsHundred = isShorterAsHundred;
