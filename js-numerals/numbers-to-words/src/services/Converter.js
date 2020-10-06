@@ -16,7 +16,7 @@ const convertToWords = (input) => {
 
   //Handle inputs that are out of the safe integer range
   if (isUnsafeValue(numberToConvert)) {
-    throw new RangeError();
+    throw new RangeError("The value is either too high or too low. Please");
   }
 
   return addAndToPhrase(createWordFromNumber(numberToConvert));
