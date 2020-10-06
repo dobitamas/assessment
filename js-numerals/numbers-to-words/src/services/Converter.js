@@ -16,7 +16,7 @@ const convertToWords = (input) => {
 
   //Handle inputs that are out of the safe integer range
   if (isUnsafeValue(numberToConvert)) {
-    return "The input is either too high or too low.";
+    throw new RangeError();
   }
 
   return addAndToPhrase(createWordFromNumber(numberToConvert));
@@ -24,7 +24,7 @@ const convertToWords = (input) => {
 
 //Recursive function to convert digits to words
 const createWordFromNumber = (number, words = []) => {
-  //Decides if the input should return "zero" or tge generated phrase
+  //Decides if the input should return "zero" or the generated phrase
   if (number === 0) {
     if (words.length === 0) {
       words.push("zero");
