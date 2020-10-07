@@ -1,11 +1,5 @@
-const {
-  convertToWords,
-  isUnsafeValue,
-  addAndToPhrase,
-  isShorterAsHundred,
-} = require("../services/Converter.js");
+import { convertToWords } from "../utils/converter";
 
-//Testing convertToWords function
 test("Should return zero", () => {
   expect(convertToWords(0)).toBe("zero");
 });
@@ -14,6 +8,10 @@ test("Should return error message", () => {
   expect(convertToWords(Number.MAX_SAFE_INTEGER + 1)).toBe(
     "The number you entered is either too high or too low."
   );
+});
+
+test("Should return error message", () => {
+  expect(convertToWords(123.12)).toBe("Please enter a round number.");
 });
 
 test("Should return one-digit number", () => {
@@ -68,41 +66,4 @@ test("Should handle string input", () => {
 
 test("Should handle numbers staring with 0", () => {
   expect(convertToWords("00013")).toBe("thirteen");
-});
-
-//Testing helper functions
-
-//isUnsafeValue tests
-test("Should return true for too high number", () => {
-  expect(isUnsafeValue(Number.MAX_SAFE_INTEGER + 1)).toBe(true);
-});
-
-test("Should return true for too low number", () => {
-  expect(isUnsafeValue(-Number.MAX_SAFE_INTEGER - 1)).toBe(true);
-});
-
-test("Should return false for input that is in expected range", () => {
-  expect(isUnsafeValue(30)).toBe(false);
-});
-
-//addAndToPhrase tests
-test("Should add 'and' between to words", () => {
-  expect(addAndToPhrase(["one hundred", "twenty-three"])).toEqual([
-    "one hundred",
-    "and",
-    "twenty-three",
-  ]);
-});
-
-test("Should not add 'and' to one word", () => {
-  expect(addAndToPhrase(["one hundred"])).toEqual(["one hundred"]);
-});
-
-//isShorterAsHundred tests
-test("Should return false when thousands are shorter", () => {
-  expect(isShorterAsHundred(2005)).toBe(false);
-});
-
-test("Should return true when hundreds are shorter", () => {
-  expect(isShorterAsHundred(1975)).toBe(true);
 });

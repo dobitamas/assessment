@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { convertToWords } from "../services/Converter.js";
+import { convertToWords } from "../utils/converter";
 import "../style/app.css";
 
 export default function NumbersToWordsForm() {
@@ -27,7 +27,7 @@ export default function NumbersToWordsForm() {
             onChange={handleChange}
           />
         </label>
-        <input type="submit" value="Convert" />
+        <button type="submit">Convert</button>
       </form>
       <h2>{numberAsWord}</h2>
     </div>
