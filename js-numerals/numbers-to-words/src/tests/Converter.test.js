@@ -12,7 +12,7 @@ test("Should return zero", () => {
 
 test("Should return error message", () => {
   expect(convertToWords(Number.MAX_SAFE_INTEGER + 1)).toBe(
-    "The input value is either too high or too low."
+    "The number you entered is either too high or too low."
   );
 });
 
