@@ -16,16 +16,21 @@ const convertToWords = (input) => {
 
   //Handle inputs that are out of the safe integer range
   if (isUnsafeValue(numberToConvert)) {
-    return "The input value is either too high or too low.";
+    return "The number you entered is either too high or too low.";
   }
 
   let createdWord = createWordFromNumber(numberToConvert);
 
   //Adds minus prefix
   if (numberToConvert < 0) {
-    createdWord.unshift("minus");
+    createdWord = "minus " + createdWord;
   }
-  return createdWord.join(" ");
+  return createdWord;
+};
+
+//Decides if input is in the safe range
+const isUnsafeValue = (numberToValidate) => {
+  return MAX_SAFE_NUMBER < Math.abs(numberToValidate);
 };
 
 //Recursive function to convert digits to words
@@ -37,7 +42,8 @@ const createWordFromNumber = (number, words = []) => {
     if (words.length === 0) {
       words.push("zero");
     }
-    return addAndToPhrase(words);
+    //Add 'and' to the where needed and return as string
+    return addAndToPhrase(words).join(" ");
   }
 
   let remainingDigits = 0;
@@ -56,50 +62,39 @@ const createWordFromNumber = (number, words = []) => {
   } else if (number < ONE_THOUSAND) {
     remainingDigits = number % ONE_HUNDRED;
     wordToAdd =
-      createWordFromNumber(Math.floor(number / ONE_HUNDRED)).join(" ") +
-      " hundred";
+      createWordFromNumber(Math.floor(number / ONE_HUNDRED)) + " hundred";
   } else if (number < ONE_MILLION) {
     if (isShorterAsHundred(number)) {
       remainingDigits = number % ONE_HUNDRED;
       wordToAdd =
-        createWordFromNumber(Math.floor(number / ONE_HUNDRED)).join(" ") +
-        " hundred";
+        createWordFromNumber(Math.floor(number / ONE_HUNDRED)) + " hundred";
     } else {
       remainingDigits = number % ONE_THOUSAND;
       wordToAdd =
-        createWordFromNumber(Math.floor(number / ONE_THOUSAND)).join(" ") +
-        " thousand";
+        createWordFromNumber(Math.floor(number / ONE_THOUSAND)) + " thousand";
     }
   } else if (number < ONE_BILLION) {
     remainingDigits = number % ONE_MILLION;
     wordToAdd =
-      createWordFromNumber(Math.floor(number / ONE_MILLION)).join(" ") +
-      " million";
+      createWordFromNumber(Math.floor(number / ONE_MILLION)) + " million";
   } else if (number < ONE_TRILLION) {
     remainingDigits = number % ONE_BILLION;
     wordToAdd =
-      createWordFromNumber(Math.floor(number / ONE_BILLION)).join(" ") +
-      " billion";
+      createWordFromNumber(Math.floor(number / ONE_BILLION)) + " billion";
   } else if (number < ONE_QUADRILLION) {
     remainingDigits = number % ONE_TRILLION;
     wordToAdd =
-      createWordFromNumber(Math.floor(number / ONE_TRILLION)).join(" ") +
-      " trillion";
+      createWordFromNumber(Math.floor(number / ONE_TRILLION)) + " trillion";
   } else if (number <= MAX_SAFE_NUMBER) {
     remainingDigits = number % ONE_QUADRILLION;
     wordToAdd =
-      createWordFromNumber(Math.floor(number / ONE_QUADRILLION)).join(" ") +
+      createWordFromNumber(Math.floor(number / ONE_QUADRILLION)) +
       " quadrillion";
   }
 
   words.push(wordToAdd);
 
   return createWordFromNumber(remainingDigits, words);
-};
-
-//Decides if input is in the safe range
-const isUnsafeValue = (numberToValidate) => {
-  return MAX_SAFE_NUMBER < Math.abs(numberToValidate);
 };
 
 //Adds "and" before the last part of the phrase

@@ -4,15 +4,28 @@ html {
 body {
   background-color: #eceff1;
   height: 100%;
-  display: flex;
+  margin-top: 50pt;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
   align-items: center;
   justify-content: center;
   font-family: Arial, sans-serif;
 }
+
 h1 {
   margin: 0;
+  margin-bottom: 15pt;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 20pt;
   margin-bottom: 10pt;
   text-align: center;
+  font-weight: lighter;
+  font-family: "Courier New", "Courier", monospace;
 }
 
 input[type="number"] {
@@ -20,8 +33,8 @@ input[type="number"] {
   background-color: #eceff1;
   border: 3px solid #ddd;
   border-radius: 20pt;
-  width: calc(100% - 35pt);
-  margin: 0;
+  display: block;
+  margin: auto;
   padding-left: 15pt;
   padding-right: 15pt;
   font-size: 15px;
@@ -58,4 +71,9 @@ input[type="submit"] {
 input[type="submit"]:hover {
   opacity: 0.8;
   transform: translate(-50%, -10%);
+}
+
+input[type="submit"]:focus {
+  outline: none;
+  box-shadow: none;
 }

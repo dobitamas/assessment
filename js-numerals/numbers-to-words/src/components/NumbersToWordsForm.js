@@ -19,16 +19,17 @@ export default function NumbersToWordsForm() {
     <div>
       <form onSubmit={handleSubmit}>
         <label>
-          <h1> Number to convert:</h1>
+          <h1> Number to Phrase Converter</h1>
           <input
             type="number"
+            placeholder="Enter a number"
             value={numberToConvert}
             onChange={handleChange}
           />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Convert" />
       </form>
-      <h1>{numberAsWord}</h1>
+      <h2>{numberAsWord}</h2>
     </div>
   );
 }
