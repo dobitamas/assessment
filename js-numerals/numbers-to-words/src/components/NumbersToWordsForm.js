@@ -3,7 +3,7 @@ import { convertToWords } from "../services/Converter.js";
 import "../style/app.css";
 
 export default function NumbersToWordsForm() {
-  const [numberToConvert, setNumberToConvert] = useState();
+  const [numberToConvert, setNumberToConvert] = useState("");
   const [numberAsWord, setNumberAsWord] = useState("");
 
   const handleChange = (event) => {
