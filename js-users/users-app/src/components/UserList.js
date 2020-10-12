@@ -3,17 +3,28 @@ import { getAllUsers } from "../utils/apiCalls";
 import User from "./User";
 
 export default function UserList() {
-  const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const usersPerPage = 10;
+  const [allUsers, setAllUsers] = useState([]);
+  const [usersToDisplay, setUsersToDisplay] = useState([]);
 
   useEffect(() => {
-    getAllUsers().then((res) => setUsers(res));
-    /*eslint-disable */
+    getAllUsers().then((response) => setAllUsers(response));
+    // eslint-disable-next-line
   }, []);
-  /*eslint-enable */
+
+  useEffect(() => {
+    setUsersToDisplay(
+      allUsers.slice(
+        usersPerPage * currentPage,
+        usersPerPage * currentPage + usersPerPage
+      )
+    );
+  }, [allUsers, currentPage]);
 
   return (
     <div>
-      {users.map((user) => (
+      {usersToDisplay.map((user) => (
         <User user={user} key={user.id} />
       ))}
     </div>
