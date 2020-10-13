@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import { toggleStatus } from "../utils/apiCalls";
+import { statuses } from "../utils/constants";
 
 export default function User(properties) {
   const [status, setStatus] = useState(properties.user.status);
 
+  const isLocked = () => {
+    return status === statuses.LOCKED;
+  };
+
   const updateStatus = (event) => {
     event.preventDefault();
-    let newStatus = status === "locked" ? "active" : "locked";
+    let newStatus = isLocked() ? statuses.ACTIVE : statuses.LOCKED;
     toggleStatus(newStatus, properties.user.id);
     setStatus(newStatus);
   };
 
   const attributeStyle = {
-    textDecoration: status === "locked" ? "line-through" : "none",
+    textDecoration: isLocked() ? "line-through" : "none",
   };
 
   return (

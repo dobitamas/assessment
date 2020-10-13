@@ -1,46 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { addNewUser } from "../utils/apiCalls";
+import UserForm from "./UserForm";
 
 export default function AddUser() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const firstName = "";
+  const lastName = "";
 
-  const firstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const lastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    addNewUser(firstName, lastName);
+  const handleSubmit = (newUserFirstName, newUserLastName) => {
+    addNewUser(newUserFirstName, newUserLastName);
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <h1>First Name</h1>
-          <input
-            type="text"
-            placeholder="First Name"
-            value={firstName}
-            onChange={firstNameChange}
-          />
-        </label>
-        <label>
-          <h1>Last Name</h1>
-          <input
-            type="text"
-            placeholder="First Name"
-            value={lastName}
-            onChange={lastNameChange}
-          />
-        </label>
-        <button type="submit">Add</button>
-      </form>
+      <UserForm
+        firstName={firstName}
+        lastName={lastName}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 }

@@ -15,12 +15,9 @@ export default function UserList() {
   }, []);
 
   useEffect(() => {
-    setUsersToDisplay(
-      allUsers.slice(
-        usersPerPage * currentPage,
-        usersPerPage * currentPage + usersPerPage
-      )
-    );
+    const firstUserIndex = usersPerPage * currentPage;
+    const lastUserIndex = usersPerPage * currentPage + usersPerPage;
+    setUsersToDisplay(allUsers.slice(firstUserIndex, lastUserIndex));
   }, [allUsers, currentPage]);
 
   const goToNextPage = (event, value) => {
