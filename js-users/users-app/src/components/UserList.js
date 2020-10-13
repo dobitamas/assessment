@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getAllUsers } from "../utils/apiCalls";
 import User from "./User";
+import Pagination from "@material-ui/lab/Pagination";
 
 export default function UserList() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -22,8 +23,17 @@ export default function UserList() {
     );
   }, [allUsers, currentPage]);
 
+  const goToNextPage = (event, value) => {
+    event.preventDefault();
+    setCurrentPage(value - 1);
+  };
+
   return (
     <div>
+      <Pagination
+        count={Math.ceil(allUsers.length / usersPerPage)}
+        onChange={goToNextPage}
+      />
       {usersToDisplay.map((user) => (
         <User user={user} key={user.id} />
       ))}
