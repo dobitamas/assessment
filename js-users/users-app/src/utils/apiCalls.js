@@ -13,10 +13,30 @@ export const getAllUsers = () => {
 };
 
 export const toggleStatus = (updatedStatus, userId) => {
-  const requestData = { status: updatedStatus };
-  return axios.put(`${baseURL}/${userId}.json`, requestData, {
+  const userData = { status: updatedStatus };
+  return axios.put(`${baseURL}/${userId}.json`, userData, {
     headers: headers,
   });
 };
 
-export const addNewUser = (firstName, lastName) => {};
+export const addNewUser = (firstName, lastName) => {
+  const getHeaders = new Headers(headers);
+  const userData = {
+    first_name: firstName,
+    last_name: lastName,
+    status: "active",
+  };
+  return axios.post(baseURL, userData, {
+    headers: getHeaders,
+  });
+};
+
+export const editUser = (firstName, lastName, userId) => {
+  const userData = {
+    first_name: firstName,
+    last_name: lastName,
+  };
+  return axios.put(`${baseURL}/${userId}.json`, userData, {
+    headers: headers,
+  });
+};
