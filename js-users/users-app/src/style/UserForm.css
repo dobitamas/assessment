@@ -1,0 +1,56 @@
+.user-form-card {
+  background: #ffffff;
+  width: 24rem;
+  height: 32rem;
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.11);
+}
+
+.user-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #eae7dc;
+}
+
+.card-title {
+  background-color: transparent;
+  padding: 1rem;
+}
+.card-title h1 {
+  color: #f44336;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.content {
+  padding: 3rem 2.5rem 5rem;
+}
+
+.input-field {
+  width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #f44336;
+  border-radius: 4rem;
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: 2px solid #f44336;
+  padding: 0.9rem 0 1.1rem;
+  transition: color 0.5s, border-color 0.5s;
+  margin-top: 1.7rem;
+}
+button:hover {
+  color: #002984;
+  border-color: #002984;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
+}

@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import { getAllUsers } from "../utils/apiCalls";
 import User from "./User";
 import Pagination from "@material-ui/lab/Pagination";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@material-ui/core";
+import "../style/UserList.css";
 
 export default function UserList() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -33,19 +36,16 @@ export default function UserList() {
   };
 
   return (
-    <div>
-      <Pagination
-        count={Math.ceil(allUsers.length / usersPerPage)}
-        onChange={goToNextPage}
-      />
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
+    <div className="user-table-container">
+      <TableContainer className="user-table" component={Paper}>
+        <Table size="big">
           <TableHead>
             <TableRow>
               <TableCell>First Name</TableCell>
               <TableCell>Last Name</TableCell>
               <TableCell>Creation Date</TableCell>
               <TableCell>Status</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -55,6 +55,11 @@ export default function UserList() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Pagination
+        count={Math.ceil(allUsers.length / usersPerPage)}
+        onChange={goToNextPage}
+        color="secondary"
+      />
     </div>
   );
 }

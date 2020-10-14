@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import TextField from "@material-ui/core/TextField";
+import Divider from "@material-ui/core/Divider";
+import "../style/UserForm.css";
 
 export default function UserForm(properties) {
   const [firstName, setFirstName] = useState(properties.firstName);
   const [lastName, setLastName] = useState(properties.lastName);
+  const [errorForFirstName, setErrorForFirstName] = useState(" ");
+  const [errorForLastName, setErrorForLastName] = useState(" ");
 
   const firstNameChange = (event) => {
     setFirstName(event.target.value);
@@ -12,34 +17,60 @@ export default function UserForm(properties) {
     setLastName(event.target.value);
   };
 
+  const handleInputError = (errorMessage) => {
+    if (errorMessage.first_name) {
+      setErrorForFirstName(errorMessage.first_name);
+    }
+    if (errorMessage.last_name) {
+      setErrorForLastName(errorMessage.last_name);
+    }
+  };
+
   const submitValues = (event) => {
     event.preventDefault();
-    properties.handleSubmit(firstName, lastName);
+    setErrorForFirstName(" ");
+    setErrorForLastName(" ");
+    properties.handleSubmit(firstName, lastName).catch((error) => {
+      handleInputError(error.response.data);
+    });
   };
 
   return (
-    <div>
-      <form onSubmit={submitValues}>
-        <label>
-          <h1>First Name</h1>
-          <input
-            type="text"
-            placeholder={firstName}
-            value={firstName}
-            onChange={firstNameChange}
-          />
-        </label>
-        <label>
-          <h1>Last Name</h1>
-          <input
-            type="text"
-            placeholder={lastName}
-            value={lastName}
-            onChange={lastNameChange}
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
+    <div className="user-form-container">
+      <div className="user-form-card">
+        <div className="card-title">
+          <h1>{properties.formTitle}</h1>
+        </div>
+        <Divider variant="middle" />
+        <form onSubmit={submitValues}>
+          <div className="content">
+            <TextField
+              className="input-field"
+              label="First Name"
+              defaultValue={firstName}
+              placeholder={firstName}
+              helperText={errorForFirstName}
+              onChange={firstNameChange}
+              variant="outlined"
+              margin="normal"
+              color="secondary"
+            />
+            <TextField
+              className="input-field"
+              label="Last Name"
+              defaultValue={lastName}
+              placeholder={lastName}
+              helperText={errorForLastName}
+              onChange={lastNameChange}
+              variant="outlined"
+              margin="normal"
+              color="secondary"
+            />
+
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

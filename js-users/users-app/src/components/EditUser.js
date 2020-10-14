@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import UserForm from "./UserForm";
+import { formTitles } from "../utils/constants";
 import { editUser, getUserById } from "../utils/apiCalls";
 
 export default function EditUser() {
@@ -17,7 +18,7 @@ export default function EditUser() {
   }, [userId]);
 
   const handleSubmit = (editedFirstName, editedLastName) => {
-    editUser(editedFirstName, editedLastName, userId);
+    return editUser(editedFirstName, editedLastName, userId);
   };
 
   const setUserData = (userData) => {
@@ -32,6 +33,7 @@ export default function EditUser() {
       <UserForm
         firstName={firstName}
         lastName={lastName}
+        formTitle={formTitles.EDIT}
         handleSubmit={handleSubmit}
       />
     </div>

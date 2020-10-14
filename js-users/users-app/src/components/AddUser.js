@@ -1,5 +1,6 @@
 import React from "react";
 import { addNewUser } from "../utils/apiCalls";
+import { formTitles } from "../utils/constants";
 import UserForm from "./UserForm";
 
 export default function AddUser() {
@@ -7,7 +8,7 @@ export default function AddUser() {
   const lastName = "";
 
   const handleSubmit = (newUserFirstName, newUserLastName) => {
-    addNewUser(newUserFirstName, newUserLastName);
+    return addNewUser(newUserFirstName, newUserLastName);
   };
 
   return (
@@ -15,6 +16,7 @@ export default function AddUser() {
       <UserForm
         firstName={firstName}
         lastName={lastName}
+        formTitle={formTitles.ADD}
         handleSubmit={handleSubmit}
       />
     </div>
