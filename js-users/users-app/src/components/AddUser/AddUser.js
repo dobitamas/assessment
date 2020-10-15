@@ -4,5 +4,11 @@ import { formTitles } from "../../utils/constants";
 import UserForm from "../UserForm/UserForm";
 
 export default function AddUser() {
-  return <UserForm formTitle={formTitles.ADD} submitUserData={addNewUser} />;
+  return (
+    <UserForm
+      className="user-form"
+      formTitle={formTitles.ADD}
+      submitUserData={addNewUser}
+    />
+  );
 }

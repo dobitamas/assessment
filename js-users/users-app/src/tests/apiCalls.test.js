@@ -1,6 +1,7 @@
 import * as apiCall from "../utils/apiCalls";
 import axios from "axios";
 import * as constants from "../utils/constants";
+import { shallow } from "enzyme";
 
 jest.mock("axios");
 

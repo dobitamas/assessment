@@ -30,9 +30,10 @@ export default function EditUser() {
   };
 
   return isLoading ? (
-    <Loader />
+    <Loader className="loader" />
   ) : (
     <UserForm
+      className="user-form"
       originalFirstName={firstName}
       originalLastName={lastName}
       formTitle={formTitles.EDIT}
