@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getAllUsers } from "../utils/apiCalls";
 import User from "./User";
+import Loader from "./Loader";
+import { Link } from "react-router-dom";
 import Pagination from "@material-ui/lab/Pagination";
 import {
   Table,
@@ -10,7 +12,9 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Fab,
 } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
 import "../style/UserList.css";
 
 export default function UserList() {
@@ -18,9 +22,13 @@ export default function UserList() {
   const usersPerPage = 10;
   const [allUsers, setAllUsers] = useState([]);
   const [usersToDisplay, setUsersToDisplay] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    getAllUsers().then((response) => setAllUsers(response));
+    getAllUsers().then((response) => {
+      setAllUsers(response);
+      setLoading(false);
+    });
     // eslint-disable-next-line
   }, []);
 
@@ -35,27 +43,47 @@ export default function UserList() {
     setCurrentPage(value - 1);
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div>
       <div className="user-table-container">
-        <TableContainer component={Paper}>
-          <Table size="big">
-            <TableHead>
-              <TableRow>
-                <TableCell>First Name</TableCell>
-                <TableCell>Last Name</TableCell>
-                <TableCell>Creation Date</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {usersToDisplay.map((user) => (
-                <User user={user} key={user.id} />
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <div className="table-title">Users</div>
+
+        <Paper>
+          <TableContainer>
+            <Table size="big">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">
+                    <Link to="/new">
+                      <Fab size="small" color="secondary" aria-label="add">
+                        <AddIcon />
+                      </Fab>
+                    </Link>
+                  </TableCell>
+                  <TableCell align="left">
+                    <strong>First Name</strong>
+                  </TableCell>
+                  <TableCell align="left">
+                    <strong>Last Name</strong>
+                  </TableCell>
+                  <TableCell align="center">
+                    <strong>Creation Date</strong>
+                  </TableCell>
+                  <TableCell align="center">
+                    <strong>Toggle Status</strong>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {usersToDisplay.map((user) => (
+                  <User user={user} key={user.id} />
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
       </div>
       <div className="pagination">
         <Pagination

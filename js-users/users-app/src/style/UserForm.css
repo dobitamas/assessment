@@ -1,15 +1,14 @@
 .user-form-card {
   background: #ffffff;
   width: 24rem;
-  height: 32rem;
+  height: 34rem;
+  margin-left: auto;
+  margin-right: auto;
   box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.11);
 }
 
 .user-form-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  display: inline-block;
   background: #eae7dc;
 }
 
@@ -18,7 +17,7 @@
   padding: 1rem;
 }
 .card-title h1 {
-  color: #f44336;
+  color: #e91e63;
   text-align: center;
   font-size: 2rem;
 }
@@ -35,12 +34,12 @@
 button {
   cursor: pointer;
   font-size: 1.2rem;
-  color: #f44336;
+  color: #e91e63;
   border-radius: 4rem;
   display: block;
   width: 100%;
   background: transparent;
-  border: 2px solid #f44336;
+  border: 2px solid #e91e63;
   padding: 0.9rem 0 1.1rem;
   transition: color 0.5s, border-color 0.5s;
   margin-top: 1.7rem;
@@ -53,4 +52,10 @@ button:hover {
 button:focus {
   outline: none;
   box-shadow: none;
+}
+
+.link {
+  color: #e91e63;
+  padding-top: 1.8rem;
+  font-size: medium;
 }

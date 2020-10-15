@@ -24,28 +24,27 @@ export default function User(properties) {
 
   const attributeStyle = {
     textDecoration: isLocked() ? "line-through" : "none",
+    color: isLocked() ? "grey" : "black",
   };
 
   return (
     <TableRow hover={true}>
-      <TableCell style={attributeStyle}>{firstName}</TableCell>
-      <TableCell style={attributeStyle}>{lastName}</TableCell>
-      <TableCell style={attributeStyle}>{creationDate}</TableCell>
-      <TableCell>
-        <Grid component="label" container alignItems="center" spacing={1}>
-          <Grid item>Lock</Grid>
-          <Grid item>
-            <Switch checked={!isLocked()} onChange={updateStatus} />
-          </Grid>
-          <Grid item>Activate</Grid>
-        </Grid>
-      </TableCell>
-      <TableCell>
+      <TableCell align="center">
         <Link to={`/edit/${userId}`}>
-          <Fab color="secondary" aria-label="edit" size="small">
-            <EditIcon />
-          </Fab>
+          <EditIcon fontSize="medium" color="secondary" />
         </Link>
+      </TableCell>
+      <TableCell style={attributeStyle} align="left">
+        {firstName}
+      </TableCell>
+      <TableCell style={attributeStyle} align="left">
+        {lastName}
+      </TableCell>
+      <TableCell style={attributeStyle} align="center">
+        {creationDate}
+      </TableCell>
+      <TableCell align="center">
+        <Switch checked={!isLocked()} onChange={updateStatus} />
       </TableCell>
     </TableRow>
   );

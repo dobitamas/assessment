@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Divider from "@material-ui/core/Divider";
 import "../style/UserForm.css";
+import { Link, withRouter } from "react-router-dom";
 
-export default function UserForm(properties) {
+function UserForm(properties) {
   const [firstName, setFirstName] = useState(properties.firstName);
   const [lastName, setLastName] = useState(properties.lastName);
   const [errorForFirstName, setErrorForFirstName] = useState(" ");
@@ -26,13 +27,22 @@ export default function UserForm(properties) {
     }
   };
 
-  const submitValues = (event) => {
-    event.preventDefault();
+  const emptyErrorMessages = () => {
     setErrorForFirstName(" ");
     setErrorForLastName(" ");
-    properties.handleSubmit(firstName, lastName).catch((error) => {
-      handleInputError(error.response.data);
-    });
+  };
+
+  const submitValues = (event) => {
+    event.preventDefault();
+    emptyErrorMessages();
+    properties
+      .submitUserData(firstName, lastName)
+      .then((response) => {
+        properties.history.push("/");
+      })
+      .catch((error) => {
+        handleInputError(error.response.data);
+      });
   };
 
   return (
@@ -66,11 +76,15 @@ export default function UserForm(properties) {
               margin="normal"
               color="secondary"
             />
-
             <button type="submit">Submit</button>
+            <Link to="/">
+              <div className="link">Back to Main Page</div>
+            </Link>
           </div>
         </form>
       </div>
     </div>
   );
 }
+
+export default withRouter(UserForm);

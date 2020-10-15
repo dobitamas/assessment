@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import UserForm from "./UserForm";
+import Loader from "./Loader";
 import { formTitles } from "../utils/constants";
 import { editUser, getUserById } from "../utils/apiCalls";
 
@@ -22,20 +23,18 @@ export default function EditUser() {
     setLastName(userData.last_name);
   };
 
-  const handleSubmit = (editedFirstName, editedLastName) => {
+  const submitUserData = (editedFirstName, editedLastName) => {
     return editUser(editedFirstName, editedLastName, userId);
   };
 
   return isLoading ? (
-    <div>Loading..</div>
+    <Loader />
   ) : (
-    <div>
-      <UserForm
-        firstName={firstName}
-        lastName={lastName}
-        formTitle={formTitles.EDIT}
-        handleSubmit={handleSubmit}
-      />
-    </div>
+    <UserForm
+      firstName={firstName}
+      lastName={lastName}
+      formTitle={formTitles.EDIT}
+      submitUserData={submitUserData}
+    />
   );
 }

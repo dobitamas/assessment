@@ -7,7 +7,7 @@ export default function AddUser() {
   const firstName = "";
   const lastName = "";
 
-  const handleSubmit = (newUserFirstName, newUserLastName) => {
+  const submitUserData = (newUserFirstName, newUserLastName) => {
     return addNewUser(newUserFirstName, newUserLastName);
   };
 
@@ -17,7 +17,7 @@ export default function AddUser() {
         firstName={firstName}
         lastName={lastName}
         formTitle={formTitles.ADD}
-        handleSubmit={handleSubmit}
+        submitUserData={submitUserData}
       />
     </div>
   );
