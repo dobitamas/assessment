@@ -17,13 +17,13 @@ export default function EditUser() {
     });
   }, [userId]);
 
-  const handleSubmit = (editedFirstName, editedLastName) => {
-    return editUser(editedFirstName, editedLastName, userId);
-  };
-
   const setUserData = (userData) => {
     setFirstName(userData.first_name);
     setLastName(userData.last_name);
+  };
+
+  const handleSubmit = (editedFirstName, editedLastName) => {
+    return editUser(editedFirstName, editedLastName, userId);
   };
 
   return isLoading ? (

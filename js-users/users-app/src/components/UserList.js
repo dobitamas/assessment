@@ -36,30 +36,34 @@ export default function UserList() {
   };
 
   return (
-    <div className="user-table-container">
-      <TableContainer className="user-table" component={Paper}>
-        <Table size="big">
-          <TableHead>
-            <TableRow>
-              <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell>
-              <TableCell>Creation Date</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {usersToDisplay.map((user) => (
-              <User user={user} key={user.id} />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Pagination
-        count={Math.ceil(allUsers.length / usersPerPage)}
-        onChange={goToNextPage}
-        color="secondary"
-      />
+    <div>
+      <div className="user-table-container">
+        <TableContainer component={Paper}>
+          <Table size="big">
+            <TableHead>
+              <TableRow>
+                <TableCell>First Name</TableCell>
+                <TableCell>Last Name</TableCell>
+                <TableCell>Creation Date</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {usersToDisplay.map((user) => (
+                <User user={user} key={user.id} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+      <div className="pagination">
+        <Pagination
+          count={Math.ceil(allUsers.length / usersPerPage)}
+          onChange={goToNextPage}
+          color="secondary"
+        />
+      </div>
     </div>
   );
 }

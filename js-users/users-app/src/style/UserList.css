@@ -1,11 +1,11 @@
 .user-table-container {
   width: 60rem;
-  align-content: center;
-  align-items: center;
+  margin: 3rem;
   display: inline-block;
 }
 
-.user-table {
-  display: flex;
-  align-self: center;
+.pagination {
+  margin: auto;
+  margin-bottom: 3rem;
+  width: 25rem;
 }
