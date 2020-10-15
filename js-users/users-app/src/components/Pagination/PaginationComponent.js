@@ -6,6 +6,7 @@ export default function PaginationComponent({ paginationCount, goToNextPage }) {
   return (
     <div className="pagination">
       <Pagination
+        className="pagination-item"
         count={paginationCount}
         onChange={goToNextPage}
         color="secondary"

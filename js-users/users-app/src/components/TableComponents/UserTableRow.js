@@ -12,21 +12,25 @@ export default function UserTableCell({
   updateStatus,
 }) {
   return (
-    <TableRow hover={true}>
-      <TableCell align="center">
-        <EditButton userId={userId} />
+    <TableRow className="table-row" hover={true}>
+      <TableCell className="table-cell" align="center">
+        <EditButton className="edit-button" userId={userId} />
       </TableCell>
-      <TableCell style={attributeStyle} align="left">
+      <TableCell className="table-cell" style={attributeStyle} align="left">
         {firstName}
       </TableCell>
-      <TableCell style={attributeStyle} align="left">
+      <TableCell className="table-cell" style={attributeStyle} align="left">
         {lastName}
       </TableCell>
-      <TableCell style={attributeStyle} align="center">
+      <TableCell className="table-cell" style={attributeStyle} align="center">
         {creationDate}
       </TableCell>
-      <TableCell align="center">
-        <Switch checked={!isLocked} onChange={updateStatus} />
+      <TableCell className="table-cell" align="center">
+        <Switch
+          className="switch"
+          checked={!isLocked}
+          onChange={updateStatus}
+        />
       </TableCell>
     </TableRow>
   );

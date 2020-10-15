@@ -4,9 +4,9 @@ import TableBody from "@material-ui/core/TableBody";
 
 export default function UserTableBody({ usersToDisplay }) {
   return (
-    <TableBody>
+    <TableBody className="table-body">
       {usersToDisplay.map((user) => (
-        <User user={user} key={user.id} />
+        <User className="user" user={user} key={user.id} />
       ))}
     </TableBody>
   );

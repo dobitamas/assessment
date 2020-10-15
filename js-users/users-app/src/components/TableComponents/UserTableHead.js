@@ -11,13 +11,13 @@ const headTitles = [
 
 export default function UserTableHead() {
   return (
-    <TableHead>
-      <TableRow>
-        <TableCell align="center">
-          <AddButton />
+    <TableHead className="table-head">
+      <TableRow className="table-row">
+        <TableCell className="table-cell" align="center">
+          <AddButton className="add-button" />
         </TableCell>
         {headTitles.map((title) => (
-          <TableCell align={title.align}>
+          <TableCell className="table-cell" align={title.align}>
             <strong>{title.text}</strong>
           </TableCell>
         ))}

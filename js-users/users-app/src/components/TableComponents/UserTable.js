@@ -7,11 +7,14 @@ export default function UserTable({ usersToDisplay }) {
   return (
     <div className="user-table-container">
       <div className="table-title">Users</div>
-      <Paper>
-        <TableContainer>
-          <Table size="medium">
-            <UserTableHead />
-            <UserTableBody usersToDisplay={usersToDisplay} />
+      <Paper className="paper">
+        <TableContainer className="table-container">
+          <Table className="table" size="medium">
+            <UserTableHead className="table-head" />
+            <UserTableBody
+              className="table-body"
+              usersToDisplay={usersToDisplay}
+            />
           </Table>
         </TableContainer>
       </Paper>
