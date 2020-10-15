@@ -26,6 +26,7 @@ export default function User({ user }) {
 
   return (
     <UserTableRow
+      className="user-table-row"
       userId={userId}
       attributeStyle={attributeStyle}
       firstName={firstName}

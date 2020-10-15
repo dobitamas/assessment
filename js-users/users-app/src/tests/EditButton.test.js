@@ -6,10 +6,10 @@ const userId = 116;
 const addUser = shallow(<EditButton userId={userId} />);
 const linkToEdit = addUser.find(".link-to-edit");
 
-it("AddButton renders a Link", () => {
+it("EditButton renders a Link", () => {
   expect(linkToEdit.length > 0).toBe(true);
 });
 
-it("AddButton renders Link with correct path", () => {
+it("EditButton renders Link with correct path", () => {
   expect(linkToEdit.props()["to"]).toBe(`/edit/${userId}`);
 });
