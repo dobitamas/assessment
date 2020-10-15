@@ -9,6 +9,7 @@ const testUser = {
   status: "locked",
   created_at: "2020-10-13T12:03:44.301Z",
 };
+
 const userComponent = shallow(<User user={testUser} key={testUser.id} />);
 const userRow = userComponent.find(".user-table-row");
 

@@ -68,7 +68,7 @@ function UserForm({
           <div className="content">
             <TextField
               error={isFirstNameErrorPresent}
-              className="input-field"
+              className="input-field first-name"
               label="First Name"
               defaultValue={firstName}
               placeholder={firstName}
@@ -80,7 +80,7 @@ function UserForm({
             />
             <TextField
               error={isLastNameErrorPresent}
-              className="input-field"
+              className="input-field last-name"
               label="Last Name"
               defaultValue={lastName}
               placeholder={lastName}
