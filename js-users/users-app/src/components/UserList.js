@@ -16,10 +16,10 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import "../style/UserList.css";
+const usersPerPage = 10;
 
 export default function UserList() {
   const [currentPage, setCurrentPage] = useState(0);
-  const usersPerPage = 10;
   const [allUsers, setAllUsers] = useState([]);
   const [usersToDisplay, setUsersToDisplay] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -29,7 +29,6 @@ export default function UserList() {
       setAllUsers(response);
       setLoading(false);
     });
-    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {

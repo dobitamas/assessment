@@ -12,13 +12,11 @@ export default function AddUser() {
   };
 
   return (
-    <div>
-      <UserForm
-        firstName={firstName}
-        lastName={lastName}
-        formTitle={formTitles.ADD}
-        submitUserData={submitUserData}
-      />
-    </div>
+    <UserForm
+      firstName={firstName}
+      lastName={lastName}
+      formTitle={formTitles.ADD}
+      submitUserData={submitUserData}
+    />
   );
 }

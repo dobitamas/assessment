@@ -37,7 +37,7 @@ function UserForm(properties) {
     emptyErrorMessages();
     properties
       .submitUserData(firstName, lastName)
-      .then((response) => {
+      .then(() => {
         properties.history.push("/");
       })
       .catch((error) => {
@@ -55,6 +55,7 @@ function UserForm(properties) {
         <form onSubmit={submitValues}>
           <div className="content">
             <TextField
+              error={!!errorForFirstName}
               className="input-field"
               label="First Name"
               defaultValue={firstName}

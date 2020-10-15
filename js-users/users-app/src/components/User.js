@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { toggleStatus } from "../utils/apiCalls";
 import { statuses } from "../utils/constants";
-import { Grid, TableCell, TableRow, Switch, Fab } from "@material-ui/core";
+import { TableCell, TableRow, Switch } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import { Link } from "react-router-dom";
 
@@ -11,7 +11,7 @@ export default function User(properties) {
   const firstName = properties.user.first_name;
   const lastName = properties.user.last_name;
   const creationDate = new Date(properties.user.created_at).toDateString();
-
+  //változó
   const isLocked = () => {
     return status === statuses.LOCKED;
   };

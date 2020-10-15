@@ -12,9 +12,11 @@ export const getAllUsers = () => {
 
 export const toggleStatus = (updatedStatus, userId) => {
   const userData = { status: updatedStatus };
-  return axios.put(`${constants.baseURL}/${userId}.json`, userData, {
-    headers: constants.headers,
-  });
+  return axios
+    .put(`${constants.baseURL}/${userId}.json`, userData, {
+      headers: constants.headers,
+    })
+    .then((response) => response);
 };
 
 export const addNewUser = (firstName, lastName) => {
@@ -24,9 +26,11 @@ export const addNewUser = (firstName, lastName) => {
     last_name: lastName,
     status: constants.statuses.ACTIVE,
   };
-  return axios.post(constants.baseURL, userData, {
-    headers: getHeaders,
-  });
+  return axios
+    .post(constants.baseURL, userData, {
+      headers: getHeaders,
+    })
+    .then((response) => response.data);
 };
 
 export const editUser = (firstName, lastName, userId) => {
@@ -34,9 +38,11 @@ export const editUser = (firstName, lastName, userId) => {
     first_name: firstName,
     last_name: lastName,
   };
-  return axios.put(`${constants.baseURL}/${userId}.json`, userData, {
-    headers: constants.headers,
-  });
+  return axios
+    .put(`${constants.baseURL}/${userId}.json`, userData, {
+      headers: constants.headers,
+    })
+    .then((response) => response);
 };
 
 export const getUserById = (userId) => {
