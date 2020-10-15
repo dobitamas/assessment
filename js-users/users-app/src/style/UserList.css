@@ -4,12 +4,6 @@
   display: inline-block;
 }
 
-.pagination {
-  margin: auto;
-  margin-bottom: 3rem;
-  width: 25rem;
-}
-
 .table-title {
   font-size: 3rem;
   font-weight: 100;

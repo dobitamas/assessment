@@ -1,12 +1,19 @@
 import React, { useState } from "react";
+import { serverErrorMessage } from "../../utils/constants";
 import TextField from "@material-ui/core/TextField";
 import Divider from "@material-ui/core/Divider";
-import "../style/UserForm.css";
+import "../../style/UserForm.css";
 import { Link, withRouter } from "react-router-dom";
 
-function UserForm(properties) {
-  const [firstName, setFirstName] = useState(properties.firstName);
-  const [lastName, setLastName] = useState(properties.lastName);
+function UserForm({
+  originalFirstName,
+  originalLastName,
+  formTitle,
+  submitUserData,
+  history,
+}) {
+  const [firstName, setFirstName] = useState(originalFirstName || "");
+  const [lastName, setLastName] = useState(originalLastName || "");
   const [errorForFirstName, setErrorForFirstName] = useState(" ");
   const [errorForLastName, setErrorForLastName] = useState(" ");
 
@@ -32,16 +39,21 @@ function UserForm(properties) {
     setErrorForLastName(" ");
   };
 
+  const isFirstNameErrorPresent = errorForFirstName !== " ";
+
+  const isLastNameErrorPresent = errorForLastName !== " ";
+
   const submitValues = (event) => {
     event.preventDefault();
     emptyErrorMessages();
-    properties
-      .submitUserData(firstName, lastName)
-      .then(() => {
-        properties.history.push("/");
-      })
+    submitUserData(firstName, lastName)
+      .then(() => history.push("/"))
       .catch((error) => {
-        handleInputError(error.response.data);
+        if (error.response) {
+          handleInputError(error.response.data);
+        } else {
+          alert(serverErrorMessage);
+        }
       });
   };
 
@@ -49,13 +61,13 @@ function UserForm(properties) {
     <div className="user-form-container">
       <div className="user-form-card">
         <div className="card-title">
-          <h1>{properties.formTitle}</h1>
+          <h1>{formTitle}</h1>
         </div>
         <Divider variant="middle" />
         <form onSubmit={submitValues}>
           <div className="content">
             <TextField
-              error={!!errorForFirstName}
+              error={isFirstNameErrorPresent}
               className="input-field"
               label="First Name"
               defaultValue={firstName}
@@ -67,6 +79,7 @@ function UserForm(properties) {
               color="secondary"
             />
             <TextField
+              error={isLastNameErrorPresent}
               className="input-field"
               label="Last Name"
               defaultValue={lastName}

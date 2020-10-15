@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import UserForm from "./UserForm";
-import Loader from "./Loader";
-import { formTitles } from "../utils/constants";
-import { editUser, getUserById } from "../utils/apiCalls";
+import UserForm from "../UserForm/UserForm";
+import Loader from "../Loader/Loader";
+import { formTitles, serverErrorMessage } from "../../utils/constants";
+import { editUser, getUserById } from "../../utils/apiCalls";
 
 export default function EditUser() {
   const { userId } = useParams();
@@ -12,10 +12,12 @@ export default function EditUser() {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    getUserById(userId).then((userData) => {
-      setUserData(userData);
-      setLoading(false);
-    });
+    getUserById(userId)
+      .then((response) => {
+        setUserData(response.data);
+        setLoading(false);
+      })
+      .catch((error) => alert(serverErrorMessage));
   }, [userId]);
 
   const setUserData = (userData) => {
@@ -31,8 +33,8 @@ export default function EditUser() {
     <Loader />
   ) : (
     <UserForm
-      firstName={firstName}
-      lastName={lastName}
+      originalFirstName={firstName}
+      originalLastName={lastName}
       formTitle={formTitles.EDIT}
       submitUserData={submitUserData}
     />
