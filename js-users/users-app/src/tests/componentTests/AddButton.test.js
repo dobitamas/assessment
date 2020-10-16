@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import AddButton from "../components/ButtonComponents/AddButton";
+import AddButton from "../../components/ButtonComponents/AddButton";
 
 const addUser = shallow(<AddButton />);
 const linkToAdd = addUser.find(".link-to-add");

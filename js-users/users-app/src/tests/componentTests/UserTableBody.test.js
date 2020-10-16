@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
-import UserTableBody from "../components/TableComponents/UserTableBody";
-import { testUsers } from "./testUtils/testConstants";
+import UserTableBody from "../../components/TableComponents/UserTableBody";
+import { testUsers } from "../testUtils/testConstants";
 
 const userTableBody = shallow(<UserTableBody usersToDisplay={testUsers} />);
 

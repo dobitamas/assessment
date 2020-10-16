@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import EditButton from "../components/ButtonComponents/EditButton";
+import EditButton from "../../components/ButtonComponents/EditButton";
 
 const userId = 116;
 const editUser = shallow(<EditButton userId={userId} />);

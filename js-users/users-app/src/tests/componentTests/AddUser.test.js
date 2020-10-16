@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
-import AddUser from "../components/AddUser/AddUser";
-import { formTitles } from "../utils/constants";
-import { addNewUser } from "../utils/apiCalls";
+import AddUser from "../../components/AddUser/AddUser";
+import { formTitles } from "../../utils/constants";
+import { addNewUser } from "../../utils/apiCalls";
 
 const addUser = shallow(<AddUser />);
 const userForm = addUser.find(".user-form");

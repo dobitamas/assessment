@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import PaginationComponent from "../components/Pagination/PaginationComponent";
+import PaginationComponent from "../../components/Pagination/PaginationComponent";
 
 const paginationCount = 10;
 const pagination = shallow(

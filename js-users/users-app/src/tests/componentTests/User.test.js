@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
-import User from "../components/User/User";
-import { testUser } from "./testUtils/testConstants";
+import User from "../../components/User/User";
+import { testUser } from "../testUtils/testConstants";
 
 const userComponent = shallow(<User user={testUser} key={testUser.id} />);
 const userRow = userComponent.find(".user-table-row");

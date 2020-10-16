@@ -1,9 +1,9 @@
 import React from "react";
 import { shallow } from "enzyme";
-import UserForm from "../components/UserForm/UserForm";
-import { formTitles } from "../utils/constants";
-import { addNewUser } from "../utils/apiCalls";
-import { testUser } from "./testUtils/testConstants";
+import UserForm from "../../components/UserForm/UserForm";
+import { formTitles } from "../../utils/constants";
+import { addNewUser } from "../../utils/apiCalls";
+import { testUser } from "../testUtils/testConstants";
 
 const userFormComponent = shallow(
   <UserForm.WrappedComponent

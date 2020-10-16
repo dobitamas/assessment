@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import UserList from "../components/UserList/UserList";
+import UserList from "../../components/UserList/UserList";
 
 const userList = shallow(<UserList />);
 const loader = userList.find("Loader");

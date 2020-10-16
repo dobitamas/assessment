@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import UserTableHead from "../components/TableComponents/UserTableHead";
+import UserTableHead from "../../components/TableComponents/UserTableHead";
 
 const userTableHead = shallow(<UserTableHead />);
 
