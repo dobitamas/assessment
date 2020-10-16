@@ -17,7 +17,11 @@ export default function UserTableHead() {
           <AddButton className="add-button" />
         </TableCell>
         {headTitles.map((title) => (
-          <TableCell className="table-cell" align={title.align}>
+          <TableCell
+            className="table-cell"
+            align={title.align}
+            key={title.text}
+          >
             <strong>{title.text}</strong>
           </TableCell>
         ))}

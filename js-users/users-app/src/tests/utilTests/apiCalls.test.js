@@ -70,9 +70,8 @@ describe("addNewUser", () => {
     );
 
     const data = { first_name: firstName, last_name: lastName, status: status };
-    const headers = { headers: new Headers(constants.headers) };
 
-    expect(axios.post).toHaveBeenCalledWith(constants.baseURL, data, headers);
+    expect(axios.post).toHaveBeenCalledWith(`${constants.baseURL}.json`, data);
   });
 
   it("should fetch erroneously data from an API", async () => {

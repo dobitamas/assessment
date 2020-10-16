@@ -2,10 +2,7 @@ import axios from "axios";
 import * as constants from "./constants";
 
 export const getAllUsers = () => {
-  const getHeaders = new Headers(constants.headers);
-  return axios.get(constants.baseURL, {
-    headers: getHeaders,
-  });
+  return axios.get(`${constants.baseURL}.json`);
 };
 
 export const toggleStatus = (updatedStatus, userId) => {
@@ -16,15 +13,12 @@ export const toggleStatus = (updatedStatus, userId) => {
 };
 
 export const addNewUser = (firstName, lastName) => {
-  const getHeaders = new Headers(constants.headers);
   const userData = {
     first_name: firstName,
     last_name: lastName,
     status: constants.statuses.ACTIVE,
   };
-  return axios.post(constants.baseURL, userData, {
-    headers: getHeaders,
-  });
+  return axios.post(`${constants.baseURL}.json`, userData);
 };
 
 export const editUser = (firstName, lastName, userId) => {
